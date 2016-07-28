@@ -6,7 +6,7 @@ class DailiesController < ApplicationController
   before_action :check_user_owner!, only: [:index, :show]
 
   def index
-    @dailies = @team.dailies.group_by { |d| d.created_at.to_date }
+    @dailies = @team.dailies_grouped_by_created_at
   end
 
   def show

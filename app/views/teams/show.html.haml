@@ -10,8 +10,6 @@
 %hr
 %p
   = @team.description
-
-%tr
 %hr
 
 -if @team.owned_by?(current_user)
@@ -30,9 +28,10 @@
           %li
             = link_to t(".show"), team_daily_path(@team, daily)
     %hr
+  - unless @team.yesterday_dailies.empty?
     = link_to t(".see_all_dailies"), team_dailies_path(@team)
 -elsif @team.member?(current_user)
-  -if Daily.created_today?(current_user, @team)
-    = link_to t(".daily.update_link"), edit_team_daily_path(@team, current_user.dailies.last)
-  -else
+  - if @team.valid_today_daily_users.include?(current_user)
+    = link_to t(".daily.update_link"), edit_team_daily_path(@team, @team.last_daily_by_user(current_user))
+  - else
     = link_to t(".daily.new_link"), new_team_daily_path(@team)

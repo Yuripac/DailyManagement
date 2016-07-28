@@ -38,6 +38,14 @@ class Team < ActiveRecord::Base
     today_dailies.map { |d| d.user }
   end
 
+  def dailies_grouped_by_created_at
+    dailies.group_by { |d| d.created_at.to_date }
+  end
+
+  def last_daily_by_user(user)
+    dailies.where(user: user).last
+  end
+
   private
 
   def add_owner_to_membership
