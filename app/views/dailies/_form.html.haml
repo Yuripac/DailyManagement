@@ -1,0 +1,7 @@
+= simple_form_for [@team, @daily] do |f|
+  .form-inputs
+    = f.input :done,        as: :text, required: false, input_html: { maxlength: 500 }, autofocus: true
+    = f.input :doing,       as: :text, required: false, input_html: { maxlength: 500 }
+    = f.input :impediments, as: :text, required: false, input_html: { maxlength: 500 }
+  .form-actions
+    = f.button :submit

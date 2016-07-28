@@ -1,0 +1,38 @@
+%h2
+  = @team.name
+- if @team.owned_by?(current_user)
+  = link_to t(".destroy_link"), @team, method: :delete, data: { confirm: "Are you sure?"}
+- elsif @team.member?(current_user)
+  = link_to t(".unjoin_link"), unjoin_team_path(@team)
+- else
+  = link_to t(".join_link"), join_team_path(@team)
+
+%hr
+%p
+  = @team.description
+
+%tr
+%hr
+
+-if @team.owned_by?(current_user)
+  %h4
+    = t(".yesterday_dailies")
+  %br
+
+  - @team.yesterday_dailies.each do |daily|
+    .row
+      .col-sm-4
+        %label
+          = t(".user.name")
+        = daily.user.name
+      .col-sm-8.text-right
+        %ul.list-inline
+          %li
+            = link_to t(".show"), team_daily_path(@team, daily)
+    %hr
+    = link_to t(".see_all_dailies"), team_dailies_path(@team)
+-elsif @team.member?(current_user)
+  -if Daily.created_today?(current_user, @team)
+    = link_to t(".daily.update_link"), edit_team_daily_path(@team, current_user.dailies.last)
+  -else
+    = link_to t(".daily.new_link"), new_team_daily_path(@team)

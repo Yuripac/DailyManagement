@@ -1,0 +1,123 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+
+en:
+  layouts:
+    application:
+      header:
+        home: HOME
+        welcome: "WELCOME, %{user}"
+        your_teams: YOUR TEAMS
+        new_team: NEW TEAM
+        dailies: DAILIES
+        sign_in: SIGN IN
+        sign_out: SIGN OUT
+        sign_up: SIGN UP
+  activerecord:
+    attributes:
+      user:
+        first_name: First Name
+        last_name: Last name
+        email: Email address
+  home:
+    index:
+      title: Missing dailies
+      daily:
+        new_link: Create your daily
+        dailies_was_created: No daily missing
+  teams:
+    index:
+      all_teams: All Teams
+      no_teams_found: No team was created
+      members:
+        zero: no members
+        one: one member
+        other: "%{count} members"
+    your_teams:
+        your_teams: Your Teams
+        has_no_teams: You have no teams
+        members:
+          zero: no members
+          one: one member
+          other: "%{count} members"
+    destroy:
+      message:
+        success: Team was destroied
+        failure: Team was not destroied
+    join:
+      message:
+        success: User joined the team
+        failure: User can not join the team
+    unjoin:
+      message:
+        success: User unjoined the team
+        failure: User can not unjoin the team
+    create:
+      message:
+        success: Team was created
+        failure: Team was not created
+    update:
+      message:
+        success: Team was updated
+        failure: Team was not updated
+    show:
+      unjoin_link: Unjoin
+      join_link: Join
+      destroy_link: Destroy
+      yesterday_dailies: Yesterday Dailies
+      team: Team
+      daily:
+        see_all_dailies: See all dailies
+        last_dailies: Last Dailies
+        created_at: created at
+        updated_at: last update
+        update_link: Update your daily
+        new_link: Create your daily
+      members:
+        zero: no members
+        one: one member
+        other: "%{count} members"
+  dailies:
+    index:
+      title: "%{team}'s dailies"
+      created_at: created at
+      updated_at: last update
+      update_link: Update daily
+    show:
+      title: "%{date} Daily"
+      updated_at: last update
+      done: What was done
+      doing: What we are doing
+      impediments: Impediments
+    new:
+      title: New Daily
+      submit_button: Created Daily
+    edit:
+      title: Edit Daily
+      submit_button: Update Daily
+    update:
+      message:
+        success: "Daily was updated"
+        failure: "Daily was not updated"
+    create:
+      message:
+        success: "Daily was created"
+        failure: "Daily was not created"

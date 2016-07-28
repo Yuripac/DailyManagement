@@ -1,0 +1,11 @@
+%h1
+  = t(".title")
+%hr
+- @missing_dailies_teams.each do |team|
+  .row
+    .col-sm-4
+      = team.name
+    .col-sm-8
+      = link_to t(".daily.new_link"), new_team_daily_path(team)
+-if @missing_dailies_teams.empty?
+  = t(".daily.no_daily_missing")

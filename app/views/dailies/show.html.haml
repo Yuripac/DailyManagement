@@ -1,0 +1,23 @@
+%h2
+  =t(".title", date: @daily.created_at.to_s(:daily))
+
+.row
+  .col-sm-4
+    %label
+      = t(".updated_at")
+    = @daily.updated_at.to_s(:daily)
+%hr
+%strong
+  =t(".done")
+%p
+  = @daily.done
+%hr
+%strong
+  =t(".doing")
+%p
+  = @daily.doing
+%hr
+%strong
+  =t(".impediments")
+%p
+  = @daily.impediments

@@ -1,0 +1,16 @@
+%h1
+  = t(".all_teams")
+  %hr
+- unless @teams.empty?
+  - @teams.each do |team|
+    %h2
+      = link_to team.name, team_path(team)
+    %p
+      = team.description
+    %span
+      = t(".members", count: team.users.count)
+    %hr
+  = paginate @teams
+- else
+  %p
+    = t('.no_team_found')

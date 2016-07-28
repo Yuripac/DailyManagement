@@ -1,0 +1,6 @@
+= simple_form_for @team do |f|
+  .form-inputs
+    = f.input :name,  required: false, autofocus: true
+    = f.input :description, as: :text, required: false, input_html: { maxlength: 200 }
+  .form-actions
+    = f.button :submit, "Ok"

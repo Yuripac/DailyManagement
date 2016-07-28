@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  done: MyString
+  doing: MyString
+  impediments: MyString
+
+two:
+  done: MyString
+  doing: MyString
+  impediments: MyString

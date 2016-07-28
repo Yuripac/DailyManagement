@@ -1,0 +1,18 @@
+%h2
+  = t(".title", team: @team.name)
+%hr
+
+- @dailies.each do |date, dailies|
+  %strong
+    = date
+  - dailies.each do |daily|
+    .container
+      .row
+        .col-sm-4
+          %label
+            = t(".user.name")
+          = daily.user.name
+        .col-sm-8.text-right
+          %ul.list-inline
+            %li
+              = link_to t(".show"), team_daily_path(@team, daily)

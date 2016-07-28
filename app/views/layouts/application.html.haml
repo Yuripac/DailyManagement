@@ -1,0 +1,41 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title DailyManagement
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  %body
+    %nav{class: %{navbar navbar-default navbar-static-top}}
+      .container
+        = link_to t(".header.home"), root_path, class: "navbar-brand"
+        - if user_signed_in?
+          %ul{class: %{nav navbar-nav}}
+            %li.nav-item
+              =link_to t(".header.your_teams"), your_teams_teams_path
+            %li.nav-item
+              =link_to t(".header.new_team"), new_team_path
+          %p{class: "navbar-text navbar-right"}
+            = t(".header.welcome", user: current_user.name.upcase)
+
+          %ul{class: %{nav navbar-nav navbar-right}}
+            %li.nav-item
+              = form_tag teams_path, method: "get", class: "navbar-form" do
+                .form-group
+                  = text_field_tag :search, params[:search], placeholder: "Search Teams", class: "form-control"
+                = submit_tag "Search", class: "btn btn-default"
+            %li.nav-item
+              = link_to t(".header.sign_out"), destroy_user_session_path, method: :delete, class: "navbar-link"
+        - else
+          %ul{class: %{nav navbar-nav navbar-right}}
+            %li.nav-item
+              = link_to t(".header.sign_in"), new_user_session_path, class: "navbar-link"
+            %li.nav-item
+              = link_to t(".header.sign_up"), new_user_registration_path, class: "navbar-link"
+    .container
+      - unless flash.empty?
+        #flash_messages
+          - flash.each do |name, value|
+            = content_tag(:div, value, class: "alert alert-#{name}")
+      = yield
