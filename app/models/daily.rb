@@ -8,8 +8,6 @@ class Daily < ActiveRecord::Base
   validates :user, uniqueness: { scope: [:team, :created_at],
     message: "Already has a daily to this team today"}
 
-  # def self.created_today?(user, team)
-  #   dailies = user.dailies.where(team: team)
-  #   !dailies.empty? && dailies.last.created_at >= Time.zone.now.beginning_of_day
-  # end
+  scope :today,     ->{ where("created_at >= ?", Time.zone.now.beginning_of_day) }
+  scope :yesterday, ->{ where("date(created_at) = ?", Time.zone.yesterday) }
 end

@@ -8,7 +8,7 @@
     %p
       = team.description
     %span
-      = t(".members", count: team.users.count)
+      = t(".members", count: team.members.count)
     %hr
   = paginate @teams
 - else

@@ -44,6 +44,8 @@ en:
         new_link: Create your daily
         dailies_was_created: No daily missing
   teams:
+    messages:
+      authenticate_failure: You don't have authorization
     index:
       all_teams: All Teams
       no_teams_found: No team was created
@@ -96,6 +98,8 @@ en:
         one: one member
         other: "%{count} members"
   dailies:
+    messages:
+      authenticate_failure: You don't have authorization
     index:
       title: "%{team}'s dailies"
       created_at: created at

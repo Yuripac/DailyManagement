@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
 
   def missing_dailies_teams
     membership_teams.select do |t|
-      t.user != self && !t.valid_today_daily_users.include?(self)
+      t.user != self && !t.valid_daily_member?(self)
     end
   end
 end

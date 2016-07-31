@@ -31,7 +31,7 @@
   - unless @team.yesterday_dailies.empty?
     = link_to t(".see_all_dailies"), team_dailies_path(@team)
 -elsif @team.member?(current_user)
-  - if @team.valid_today_daily_users.include?(current_user)
+  - if @team.valid_daily_member?(current_user)
     = link_to t(".daily.update_link"), edit_team_daily_path(@team, @team.last_daily_by_user(current_user))
   - else
     = link_to t(".daily.new_link"), new_team_daily_path(@team)

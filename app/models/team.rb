@@ -3,7 +3,7 @@ class Team < ActiveRecord::Base
   paginates_per 10
 
   has_many :memberships, dependent: :destroy
-  has_many :users, through: :memberships
+  has_many :members, through: :memberships, source: :user
 
   belongs_to :user
 
@@ -19,7 +19,7 @@ class Team < ActiveRecord::Base
   end
 
   def member?(user)
-    users.include? user
+    members.include? user
   end
 
   def owned_by?(user)
@@ -27,15 +27,19 @@ class Team < ActiveRecord::Base
   end
 
   def yesterday_dailies
-    dailies.where("DATE(created_at) = ?", Time.zone.yesterday)
+    dailies.yesterday
   end
 
   def today_dailies
-    dailies.where("created_at >= ?", Time.zone.now.beginning_of_day)
+    dailies.today
   end
 
-  def valid_today_daily_users
+  def valid_daily_members
     today_dailies.map { |d| d.user }
+  end
+
+  def valid_daily_member?(user)
+    valid_daily_members.include?(user)
   end
 
   def dailies_grouped_by_created_at
@@ -49,6 +53,6 @@ class Team < ActiveRecord::Base
   private
 
   def add_owner_to_membership
-    users << user
+    members << user
   end
 end

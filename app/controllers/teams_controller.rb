@@ -1,8 +1,10 @@
 class TeamsController < ApplicationController
 
+  include TeamAuthentications
+
   before_action :set_team, only: [:show, :edit, :update,
-                                  :delete, :join, :unjoin, :destroy]
-  before_action :check_user_owner!, only: [:edit, :update, :delete, :destroy]
+                                  :join, :unjoin, :destroy]
+  before_action :authenticate_team_owner!, only: [:edit, :update, :destroy]
 
   def index
     @teams = if params[:search]
@@ -32,8 +34,8 @@ class TeamsController < ApplicationController
   end
 
   def unjoin
-    if @team.users.include?(current_user) && !(@team.user == current_user)
-      @team.users.destroy(current_user)
+    if @team.member?(current_user) && !(@team.user == current_user)
+      @team.members.destroy(current_user)
       flash[:success] = t(".message.success")
     else
       flash[:danger] = t(".message.failure")
@@ -78,14 +80,7 @@ class TeamsController < ApplicationController
     redirect_to teams_path
   end
 
-  private
-
-  def check_user_owner!
-    unless @team.user == current_user
-      flash[:warning] = t(".message.user_not_owner")
-      redirect_to root_path
-    end
-  end
+  protected
 
   def set_team
     @team = Team.find(params[:id])

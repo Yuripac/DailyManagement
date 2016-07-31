@@ -1,9 +1,12 @@
 class DailiesController < ApplicationController
 
+  include TeamAuthentications
+
   before_action :set_team
   before_action :set_daily, only: [:show, :edit, :update]
-  before_action :check_user_member!, only: [:edit, :update, :new, :create]
-  before_action :check_user_owner!, only: [:index, :show]
+  before_action :authenticate_team_member!, only: [:edit, :update, :new, :create]
+  before_action :authenticate_daily_owner!, only: [:edit, :update]
+  before_action :authenticate_team_owner!,  only: [:index, :show]
 
   def index
     @dailies = @team.dailies_grouped_by_created_at
@@ -40,18 +43,11 @@ class DailiesController < ApplicationController
     end
   end
 
-  private
+  protected
 
-  def check_user_owner!
-    unless @team.user == current_user
-      flash[:warning] = t(".user_not_owner")
-      redirect_to root_path
-    end
-  end
-
-  def check_user_member!
-    unless @team.users.include?(current_user)
-      flash[:warning] = t(".user_not_member")
+  def authenticate_daily_owner!
+    unless @daily.user = current_user
+      flash[:warning] = t("dailies.messages.authenticate_failure")
       redirect_to root_path
     end
   end
