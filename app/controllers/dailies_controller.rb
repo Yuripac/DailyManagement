@@ -46,7 +46,7 @@ class DailiesController < ApplicationController
   protected
 
   def authenticate_daily_owner!
-    unless @daily.user = current_user
+    unless @daily.user == current_user
       flash[:warning] = t("dailies.messages.authenticate_failure")
       redirect_to root_path
     end
