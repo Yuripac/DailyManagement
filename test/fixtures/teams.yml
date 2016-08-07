@@ -1,9 +1,23 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
-  description: MyString
+starks:
+  id: 1
+  name: starks
+  description: winter is comming
+  user_id: 2
 
-two:
-  name: MyString
-  description: MyString
+bastards:
+  id: 2
+  name: bastards
+  description: just bastards =(
+  user_id: 1
+
+boltons:
+  id: 3
+  name: boltons
+  description: our blades are sharp
+
+targaryens:
+  id: 4
+  name: targaryens
+  description: fire and blood

@@ -47,7 +47,7 @@ class Team < ActiveRecord::Base
   end
 
   def last_daily_by_user(user)
-    dailies.where(user: user).last
+    dailies.where(user: user).order("created_at asc").last
   end
 
   private
